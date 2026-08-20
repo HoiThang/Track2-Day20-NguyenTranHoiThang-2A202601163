@@ -1,7 +1,7 @@
 # 01 - Tune: thread-count sweep
 
-Model `gemma-4-E2B-it-UD-Q4_K_XL.gguf` · host `Windows-AMD64` · llama.cpp `b10488`
-CPU: **24 physical · 32 logical** cores · `ngl=99` · metric `tg128`
+Model `gemma-4-E2B-it-UD-Q4_K_XL.gguf` ï¿½ host `Windows-AMD64` ï¿½ llama.cpp `b10488`
+CPU: **24 physical ï¿½ 32 logical** cores ï¿½ `ngl=99` ï¿½ metric `tg128`
 
 | threads (-t) | tg128 (tok/s) | vs best |
 |:--|--:|--:|
@@ -21,10 +21,6 @@ Use this in your run:
 LAB_N_THREADS=24 make bench
 ```
 
-## Your explanation (required -- replace this line)
+## Your explanation
 
-_Where is the knee, and why there? If the peak sits at your physical core count
-and drops above it, say what the extra threads are competing for. If your curve
-does something else -- flat, or still climbing at 2x logical cores -- say that
-instead and reason about why. A result that contradicts the expected shape is
-worth more than one that matches it, as long as you explain it._
+**The knee is at physical core count (-t 24), then flat/slight drop.** The curve is nearly flat (161.6 to 171.4 tok/s = 1.06x spread) because this workload is GPU-bound, not CPU-bound. With ngl=99, all model layers run on NVIDIA RTX 4080, so CPU threads mainly handle scheduling and small memory copies. The 1.06x spread is small but consistent: more threads help with prefill batching and KV cache management slightly. At -t 32 and -t 64, throughput drops slightly (170.8 and 168.7 tok/s) due to oversubscription overhead. Physical core count (-t 24) is optimal because it matches the CPU's natural parallelism without oversubscription.

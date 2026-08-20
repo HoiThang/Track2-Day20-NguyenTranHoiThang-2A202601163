@@ -1,7 +1,7 @@
 # 02 - Serve: load test + saturation reading
 
-Host `Windows-AMD64` · llama.cpp `b10488` ·
-`--parallel 4` · `ctx=2048` · `threads=24` ·
+Host `Windows-AMD64` ï¿½ llama.cpp `b10488` ï¿½
+`--parallel 4` ï¿½ `ctx=2048` ï¿½ `threads=24` ï¿½
 `ngl=99`
 
 | Users | Reqs | RPS | P50 (ms) | P95 (ms) | P99 (ms) | Eff. concurrency | Failures |
@@ -27,8 +27,6 @@ utilisation. For true slot utilisation use the server's own gauges (`make metric
 
 P95 grew no faster than throughput (1.77x vs 2.02x), so this server still has headroom at 50 users.
 
-## Your reading (required -- replace this line)
+## Your reading
 
-_Where does your server saturate, and what is the evidence? Name the number that
-convinced you. Then say what you would change first to raise goodput at your SLO --
-and why that knob and not another._
+**Server saturates between 10 and 50 users.** Evidence: effective concurrency at 50 users is 41.6, which is 10x the --parallel 4 slots. This means 37.6 requests were queued, not being processed. The throughput only scaled 2.02x for 5x offered load, confirming saturation. To raise goodput@SLO, I would increase --parallel first (e.g., to 8 or 16) because it directly increases the number of concurrent decode slots without requiring model changes or recompilation. The next knob would be quantization (Q2 is faster) or GPU offload configuration.

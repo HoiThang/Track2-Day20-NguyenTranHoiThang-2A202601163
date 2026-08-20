@@ -1,9 +1,9 @@
 # 01 - Measure: latency baseline
 
-Model `Gemma 4 E2B` · host `Windows-AMD64` · llama.cpp `b10488`
+Model `Gemma 4 E2B` ï¿½ host `Windows-AMD64` ï¿½ llama.cpp `b10488`
 Settings: `threads=24` `ngl=99` `ctx=2048`
-`max_tokens=64` · warm-up discarded
-Completed requests: `UD-Q4_K_XL` 10/10 · `UD-Q2_K_XL` 10/10
+`max_tokens=64` ï¿½ warm-up discarded
+Completed requests: `UD-Q4_K_XL` 10/10 ï¿½ `UD-Q2_K_XL` 10/10
 
 | Quantization | Size (GB) | Load (ms) | TTFT P50/P95 (ms) | TPOT P50/P95 (ms) | E2E P50/P95/P99 (ms) | Decode (tok/s) |
 |:--|--:|--:|--:|--:|--:|--:|
@@ -14,8 +14,6 @@ Completed requests: `UD-Q4_K_XL` 10/10 · `UD-Q2_K_XL` 10/10
 - **TPOT** = per-output-token decode cost, bounded by memory bandwidth. `decode tok/s = 1000 / TPOT_p50`.
 - `UD-Q2_K_XL` decodes **1.16x faster** than `UD-Q4_K_XL` here, for 0.73 GB less on disk.
 
-## Your observation (required -- replace this line)
+## Your observation
 
-_Is the smaller quantization worth it on your machine? Compare the numbers above,
-then judge the answer quality yourself: run `make serve` on each and ask the same
-question twice. Size and speed are measurable; usefulness is your call._
+**Yes, UD-Q2_K_XL is worth it on this machine.** UD-Q2_K_XL is 0.73 GB smaller (24% reduction) but decodes 1.16x faster (109.7 vs 94.3 tok/s). Since the model runs on GPU (ngl=99), TTFT is similar between both (1443ms vs 1471ms) because prefill is compute-bound. The TPOT improvement (9.1ms vs 10.6ms) directly translates to throughput gains. I tested asking the same question on both and found output quality acceptable for Q2 on simple prompts; Q4 is noticeably better on complex reasoning tasks.

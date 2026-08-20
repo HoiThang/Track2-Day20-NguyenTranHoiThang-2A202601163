@@ -1,7 +1,7 @@
 # 03 - Integrate: RAG pipeline run
 
-Host `Windows-AMD64` · llama.cpp `b10488` ·
-retrieval backend: **keyword overlap** · 3 queries
+Host `Windows-AMD64` ï¿½ llama.cpp `b10488` ï¿½
+retrieval backend: **keyword overlap** ï¿½ 3 queries
 
 | Query | Contexts retrieved | embed (ms) | retrieve (ms) | llm (ms) | total (ms) |
 |:--|--:|--:|--:|--:|--:|
@@ -9,8 +9,8 @@ retrieval backend: **keyword overlap** · 3 queries
 | What problem does PagedAttention actually so... | paged, radix, disagg | 0.0 | 0.0 | 2794.0 | 2794.1 |
 | When does splitting prefill and decode help?... | disagg, radix, batching | 0.0 | 0.1 | 2741.3 | 2741.4 |
 
-Mean per stage (ms): embed **0.0** · retrieve **0.0** ·
-llm **2824.3** · total **2824.3**
+Mean per stage (ms): embed **0.0** ï¿½ retrieve **0.0** ï¿½
+llm **2824.3** ï¿½ total **2824.3**
 Dominant stage: **llm** (100% of total)
 
 ## Answers returned
@@ -28,8 +28,11 @@ Dominant stage: **llm** (100% of total)
 > Splitting prefill and decode helps because prefill is compute-bound and decode is memory-bandwidth-bound.
 
 
-## Which N16-N19 pieces are real (required -- replace this line)
+## Which N16-N19 pieces are real
 
-_List each of N16, N17, N18, N19 as real or stubbed. Stubbing costs no points;
-misrepresenting it does. Then answer: is the dominant stage above what you expected?
-If you had to halve this pipeline's latency, which stage would you attack and why?_
+**N16 (Cloud/IaC):** stub â€” no cloud infrastructure actually deployed
+**N17 (Data pipeline):** stub â€” no ETL jobs running
+**N18 (Lakehouse):** stub â€” no real data warehouse
+**N19 (Vector + features):** stub â€” keyword fallback for embeddings, no real vector DB
+
+**The dominant stage (llm, 100%) is exactly what I expected** because all other stages are stubbed. In a real production RAG system, embed would be 50-200ms and retrieve 10-50ms, making llm still dominant but not 100%. To halve pipeline latency, I would attack the LLM stage first â€” use a smaller/faster model or enable KV cache / prefix caching for repeated queries.
