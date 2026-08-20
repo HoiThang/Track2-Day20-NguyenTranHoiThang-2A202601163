@@ -3,8 +3,8 @@
   "mean_ms": {
     "embed": 0.0,
     "retrieve": 0.0,
-    "llm": 2824.3,
-    "total": 2824.3
+    "llm": 2621.3,
+    "total": 2621.4
   },
   "results": [
     {
@@ -28,19 +28,19 @@
       "timings_ms": {
         "embed": 0.0,
         "retrieve": 0.0,
-        "llm": 2937.5,
-        "total": 2937.5
+        "llm": 2764.9,
+        "total": 2765.0
       },
       "server_timings": {
         "prompt_n": 149,
-        "prompt_ms": 399.801,
+        "prompt_ms": 185.958,
         "predicted_n": 30,
-        "predicted_ms": 282.501
+        "predicted_ms": 198.092
       }
     },
     {
       "query": "What problem does PagedAttention actually solve?",
-      "answer": "PagedAttention stores the KV cache in non-contiguous pages, which removes the internal fragmentation that wasted most GPU memory.",
+      "answer": "PagedAttention stores the KV cache in non-contiguous pages, removing the internal fragmentation that wasted most GPU memory.",
       "contexts": [
         {
           "id": "paged",
@@ -59,14 +59,14 @@
       "timings_ms": {
         "embed": 0.0,
         "retrieve": 0.0,
-        "llm": 2794.0,
-        "total": 2794.1
+        "llm": 2526.9,
+        "total": 2527.0
       },
       "server_timings": {
         "prompt_n": 114,
-        "prompt_ms": 123.5,
-        "predicted_n": 24,
-        "predicted_ms": 299.901
+        "prompt_ms": 81.678,
+        "predicted_n": 23,
+        "predicted_ms": 247.763
       }
     },
     {
@@ -89,15 +89,15 @@
       "embed_backend": "keyword overlap",
       "timings_ms": {
         "embed": 0.0,
-        "retrieve": 0.1,
-        "llm": 2741.3,
-        "total": 2741.4
+        "retrieve": 0.0,
+        "llm": 2572.1,
+        "total": 2572.1
       },
       "server_timings": {
         "prompt_n": 113,
-        "prompt_ms": 123.656,
+        "prompt_ms": 105.439,
         "predicted_n": 24,
-        "predicted_ms": 306.683
+        "predicted_ms": 255.543
       }
     }
   ]
