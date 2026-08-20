@@ -1,0 +1,14 @@
+
+────────────────────────────────────────────────────────────────
+  llama-server on :8080
+────────────────────────────────────────────────────────────────
+  binary   : llama-server.exe  (llama.cpp b10488)
+  model    : gemma-4-E2B-it-UD-Q4_K_XL.gguf  [UD-Q4_K_XL]
+  threads  : 24    ngl: 99    ctx: 2048
+  slots    : 4 (continuous batching on)
+  endpoints: http://localhost:8080/v1/chat/completions
+             http://localhost:8080/metrics   <- Prometheus, rubric item 7
+             http://localhost:8080/slots     <- per-slot state
+
+  C:\Users\Tunnne\Downloads\code\Track2-Day20-NguyenTranHoiThang-2A202601163\runtime\b10488\llama-server.exe -m C:\Users\Tunnne\Downloads\code\Track2-Day20-NguyenTranHoiThang-2A202601163\models\gemma-4-E2B-it-UD-Q4_K_XL.gguf --host 127.0.0.1 --port 8080 -t 24 -ngl 99 --ctx-size 2048 --parallel 4 --cont-batching --metrics --reasoning off
+
